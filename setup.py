@@ -1,4 +1,3 @@
-cat > setup.py << EOF
 from setuptools import setup, find_packages
 
 setup(
@@ -9,4 +8,3 @@ setup(
         "requests>=2.25.0",
     ],
 )
-EOF
