@@ -252,7 +252,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 ## 📬 Contact
 
-- **GitHub Issues**: [AuralithLabs/spacekit/issues](https://github.com/AuralithLabs/spacekit/issues)
+- **GitHub Issues**: [Auralith-SIH/spacekit/issues](https://github.com/Auralith-SIH/spacekit/issues)
 - **Auralith Labs** - Student-led SpaceTech initiative
 ---
 
