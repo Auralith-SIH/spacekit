@@ -1,3 +1,6 @@
+I can see your README has formatting issues with mixed content. Here's the **clean, properly formatted README.md** that matches your actual SpaceKit implementation:
+
+```markdown
 <p align="center">
   <img src="assets/spacekit-logo.png" width="180" alt="SpaceKit Logo">
 </p>
@@ -36,68 +39,11 @@
 
 ## ✨ Features
 
-- 🛰️ **NASA API Integration** — APOD, Mars Rover, Space Weather  
-- 🌌 **Astronomy Calculations** — RA/DEC to ALT/AZ, satellite passes  
-- 📡 **Satellite Tracking** — ISS & other real-time predictions  
-- 📊 **Data Processing Tools** — Clean, transform, visualize  
-- 🎯 **Beginner Friendly** — Simple Python functions  
-- 🇮🇳 **Indigenous Focus** — ISRO mission & telemetry utilities  
-- 💡 **Modular, documented, open-source**
-
----
-
-## 🚀 Quick Start
-
-### **Installation**
-```bash
-pip install spacekit
-
-Perfect! Here’s a **fully polished, GitHub-ready Markdown README** for your SpaceKit project. Everything is in **pure Markdown**, all Python code blocks are correct, tables render properly, and it looks professional. You can copy-paste this directly into your `README.md` file:
-
-````markdown
-# SpaceKit 🚀
-
-A lightweight, beginner-friendly Python toolkit for space-data analysis, astronomy calculations, and NASA/ISRO API integration.
-
----
-
-## 📌 Badges
-
-[![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/Auralith-SIH/spacekit?style=social)](https://github.com/Auralith-SIH/spacekit)
-[![Status](https://img.shields.io/badge/Status-Active-success)]()
-[![Maintained](https://img.shields.io/badge/Maintained-Yes-green)]()
-
----
-
-## 📑 Table of Contents
-
-- [✨ Features](#-features)
-- [🚀 Quick Start](#-quick-start)
-- [📚 API Reference](#-api-reference)
-- [📡 Supported APIs](#-supported-apis)
-- [📁 Project Structure](#-project-structure)
-- [📖 Examples](#-examples)
-- [📝 API Key Setup](#-api-key-setup)
-- [🤝 Contributing](#-contributing)
-- [📊 Roadmap](#-roadmap)
-- [🏗 Built With](#-built-with)
-- [❓ FAQ](#-faq)
-- [📄 License](#-license)
-- [📬 Contact](#-contact)
-
----
-
-## ✨ Features
-
-- 🛰️ **NASA API Integration** — APOD, Mars Rover, Space Weather  
-- 🌌 **Astronomy Calculations** — RA/DEC to ALT/AZ, satellite passes  
-- 📡 **Satellite Tracking** — ISS & other real-time predictions  
-- 📊 **Data Processing Tools** — Clean, transform, visualize  
-- 🎯 **Beginner Friendly** — Simple Python functions  
-- 🇮🇳 **Indigenous Focus** — ISRO mission & telemetry utilities  
-- 💡 **Modular, documented, open-source**
+- 🛰️ **NASA API Integration** — Astronomy Picture of the Day (APOD) with demo fallback
+- 🌌 **Space Weather Simulation** — Solar activity and space weather data
+- 📡 **Satellite Tracking** — ISS position and tracking utilities
+- 🎯 **Beginner Friendly** — Simple Python functions with clear documentation
+- 💡 **Modular & Open Source** — Easy to extend and contribute to
 
 ---
 
@@ -106,219 +52,214 @@ A lightweight, beginner-friendly Python toolkit for space-data analysis, astrono
 ### Installation
 ```bash
 pip install spacekit
-````
+```
 
 ### Basic Usage
-
 ```python
 import spacekit
 
-# Space weather
+# Get NASA Astronomy Picture of the Day (with demo fallback)
+apod = spacekit.get_apod_safe()
+print("Title:", apod['title'])
+
+# Get space weather data
 weather = spacekit.get_space_weather()
-print(f"Solar activity: {weather['solar_flares']}")
+print("Solar flares:", weather['solar_flares'])
 
-# ISS position
-position = spacekit.satellite_position('ISS')
-print("ISS Position:", position)
-
-# NASA Astronomy Picture of the Day
-apod = spacekit.get_apod()
-print("Today's NASA APOD:", apod["title"])
+# Track ISS position
+iss = spacekit.satellite_position('ISS')
+print("ISS Latitude:", iss['latitude'])
 ```
 
 ---
 
 ## 📚 API Reference
 
-### spacekit.nasa
+### Core Functions
+
+#### `get_apod(api_key="DEMO_KEY")`
+Get NASA Astronomy Picture of the Day.
 
 ```python
-from spacekit import nasa
+from spacekit import get_apod
 
-apod = nasa.get_apod()
-mars_photos = nasa.get_mars_photos("curiosity", "2024-01-01")
-space_weather = nasa.get_space_weather()
+# With demo key (rate limited)
+result = get_apod()
+
+# With your NASA API key
+result = get_apod(api_key="your_nasa_api_key")
 ```
 
-### spacekit.astronomy
+#### `get_apod_safe()`
+Safe version that provides demo data if NASA API fails.
 
 ```python
-from spacekit import astronomy
+from spacekit import get_apod_safe
 
-coords = astronomy.radec_to_altaz(ra=83.82, dec=22.01, lat=28.61, lon=77.23)
-passes = astronomy.get_satellite_passes("ISS", lat=28.61, lon=77.23)
+# Always returns data, even if API fails
+result = get_apod_safe()
+print(result['title'])  # Always works
 ```
 
-### spacekit.isro
+#### `get_space_weather()`
+Get simulated space weather data.
 
 ```python
-from spacekit import isro
+from spacekit import get_space_weather
 
-missions = isro.get_mission_data("Chandrayaan-3")
-telemetry = isro.get_satellite_telemetry("INSAT-3DR")
+weather = get_space_weather()
+print(weather['solar_flares'])  # "low", "medium", "high"
+```
+
+#### `satellite_position(satellite_name)`
+Get satellite position data.
+
+```python
+from spacekit import satellite_position
+
+iss = satellite_position('ISS')
+print(f"Lat: {iss['latitude']}, Lon: {iss['longitude']}")
 ```
 
 ---
 
 ## 📡 Supported APIs
 
-| API Name            | Module                           | Status   | Description                         |
-| ------------------- | -------------------------------- | -------- | ----------------------------------- |
-| NASA APOD           | `nasa.get_apod()`                | ✔️ Ready | Astronomy Picture of the Day        |
-| Mars Rover Photos   | `nasa.get_mars_photos()`         | ✔️ Ready | Curiosity/Opportunity/Spirit images |
-| Space Weather       | `nasa.get_space_weather()`       | ✔️ Ready | Solar activity, solar wind, flares  |
-| ISRO Mission DB     | `isro.get_mission_data()`        | 🚧 WIP   | Mission details & descriptions      |
-| Satellite Telemetry | `isro.get_satellite_telemetry()` | 🚧 WIP   | INSAT, GSAT, NavIC telemetry        |
-| ISS Tracking        | `astronomy.satellite_position()` | ✔️ Ready | Real-time ISS position              |
+| Feature       |         Module         |    Status   |        Description          |
+|---------------|------------------------|-------------|-----------------------------|
+| NASA APOD     | `get_apod()`           | ✅ Working | Astronomy Picture of the Day |
+| Safe APOD     | `get_apod_safe()`      | ✅ Working | Demo data fallback           |
+| Space Weather | `get_space_weather()`  | ✅ Working | Simulated space weather      |
+| ISS Tracking  | `satellite_position()` | ✅ Working | Satellite position data      |
 
 ---
 
 ## 📁 Project Structure
-
 ```
 spacekit/
-│── spacekit/
-│   ├── nasa.py
-│   ├── astronomy.py
-│   ├── isro.py
-│   ├── utils.py
-│   └── __init__.py
-│── examples/
-│── tests/
-│── assets/
-│── README.md
-│── requirements.txt
-│── setup.py
+├── spacekit/
+│   ├── __init__.py          # Package exports
+│   ├── nasa.py              # NASA API integration
+│   └── astronomy.py         # Astronomy utilities
+├── requirements.txt         # Dependencies
+├── setup.py                # Package configuration
+└── README.md               # This file
 ```
 
 ---
 
 ## 📖 Examples
 
-### Space Weather Visualization
-
+### Complete Demo Script
 ```python
-import spacekit
-import matplotlib.pyplot as plt
+from spacekit import get_apod_safe, get_space_weather, satellite_position
 
-data = spacekit.nasa.get_space_weather()
-
-plt.plot(data["solar_flux"])
-plt.title("Solar Flux Activity")
-plt.ylabel("Solar Flux Units")
-plt.show()
+print("🚀 SpaceKit Demo")
+print("NASA APOD:", get_apod_safe()['title'])
+print("Space Weather:", get_space_weather()['solar_flares'])
+print("ISS Position:", satellite_position('ISS')['latitude'])
 ```
 
-### Real-Time ISS Tracker
-
+### Real-time ISS Tracker
 ```python
-import spacekit
 import time
+from spacekit import satellite_position
 
 while True:
-    p = spacekit.astronomy.satellite_position("ISS")
-    print(f"Lat: {p['latitude']:.2f}, Lon: {p['longitude']:.2f}")
-    time.sleep(30)
+    iss = satellite_position('ISS')
+    print(f"ISS: Lat {iss['latitude']}°, Lon {iss['longitude']}°")
+    time.sleep(10)
 ```
 
 ---
+## 📝 Configuration & API Keys
 
-## 📝 API Key Setup
-
-**Option 1 — Environment Variable**
-
-```bash
-export NASA_API_KEY="your_key_here"
-```
-
-**Option 2 — In Python**
+### NASA API Key
+For full NASA API access, get a free key at [api.nasa.gov](https://api.nasa.gov):
 
 ```python
-spacekit.configure(api_key="your_key_here")
+from spacekit import get_apod
+
+# Use your NASA API key for full access
+result = get_apod(api_key="YOUR_NASA_API_KEY")
 ```
 
-*If no key is set, SpaceKit uses NASA’s demo key.*
+**Without an API key**, SpaceKit uses NASA's demo key which has rate limits.
 
 ---
-
 ## 🤝 Contributing
 
-1. Fork the repo
-2. Create a branch:
+We welcome contributions! Here's how:
 
-```bash
-git checkout -b feature/amazing-feature
-```
-
-3. Commit changes:
-
-```bash
-git commit -m "Add amazing feature"
-```
-
-4. Push:
-
-```bash
-git push origin feature/amazing-feature
-```
-
-5. Open a Pull Request
+1. **Fork** the repository
+2. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit your changes**:
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+4. **Push to the branch**:
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
 
 ---
+## 🗂 Changelog
 
-## 📊 Roadmap
-
-* [x] NASA APOD API wrapper
-* [x] Basic astronomy calculations
-* [ ] ISRO mission & telemetry integration
-* [ ] Real-time satellite tracking dashboard
-* [ ] Space weather alert engine
-* [ ] Mobile companion app
-* [ ] Offline caching mode
+### v0.1.0
+- Initial release with NASA APOD integration
+- Space weather simulation
+- Satellite tracking utilities
+- Safe fallback mechanisms
 
 ---
+## 📊 Project Roadmap
 
+- [x] NASA APOD API integration
+- [x] Space weather simulation
+- [x] Satellite tracking utilities
+- [ ] Real NASA API key support
+- [ ] More astronomy calculations
+- [ ] ISRO data integration
+- [ ] Data visualization tools
+
+---
 ## 🏗 Built With
 
-* Python 3.8+
-* Requests
-* NumPy
-* Pandas
-* Matplotlib
-* FastAPI (future)
+- **Python 3.8+** - Core programming language
+- **Requests** - HTTP library for API calls
+- **Setuptools** - Package distribution
 
 ---
-
 ## ❓ FAQ
 
 **Do I need a NASA API key?**
-Optional, the demo key is used by default.
+- Optional. SpaceKit works with the demo key, but for full access get a free key from api.nasa.gov.
 
-**Does SpaceKit work offline?**
-Astronomy calculations: ✔️
-NASA/ISRO API calls: ❌ Internet required.
+**Does it work offline?**
+- Basic functions work, but NASA API features require internet.
 
-**Is it free?**
-Yes — 100% open-source (MIT License).
+**Is this free to use?**
+- Yes! 100% open-source under MIT License.
+
+**How accurate is the satellite tracking?**
+- Currently provides simulated data - real tracking is planned for future versions.
 
 ---
-
 ## 📄 License
 
-MIT License — see [LICENSE](LICENSE) file.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
 ## 📬 Contact
 
-GitHub Issues: [https://github.com/Auralith-SIH/spacekit/issues](https://github.com/Auralith-SIH/spacekit/issues)
-
+- **GitHub Issues**: [Auralith-SIH/spacekit/issues](https://github.com/Auralith-SIH/spacekit/issues)
+- **Auralith Labs** - Student-led SpaceTech initiative
 ---
 
 <p align="center"><b>⭐ If you find this project useful, please star the repository! ⭐</b></p>
 <p align="center">Built with ❤️ by students passionate about space technology.</p>
 ```
-
----
-
-
