@@ -1,5 +1,3 @@
-I can see your README has formatting issues with mixed content. Here's the **clean, properly formatted README.md** that matches your actual SpaceKit implementation:
-
 ```markdown
 <p align="center">
   <img src="assets/spacekit-logo.png" width="180" alt="SpaceKit Logo">
