@@ -1,4 +1,3 @@
-```markdown
 <p align="center">
   <img src="assets/spacekit-logo.png" width="180" alt="SpaceKit Logo">
 </p>
@@ -50,7 +49,6 @@
 ### Installation
 ```bash
 pip install spacekit
-```
 
 ### Basic Usage
 ```python
