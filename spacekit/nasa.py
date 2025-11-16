@@ -1,25 +1,28 @@
 import requests
 
-def get_apod():
-    """
-    Get NASA Astronomy Picture of the Day.
-    
-    Returns:
-        dict: APOD data including title, explanation, and image URL
-    """
+DEMO_KEY = "DEMO_KEY"
+
+def get_apod(api_key=DEMO_KEY):
     url = "https://api.nasa.gov/planetary/apod"
-    response = requests.get(url)
-    return response.json()
+    params = {'api_key': api_key}
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        return response.json()
+    except:
+        return {"title": "SpaceKit Demo", "url": "", "error": True}
+
+def get_apod_safe():
+    data = get_apod()
+    if data.get('error'):
+        return {
+            "title": "Welcome to SpaceKit!",
+            "url": "https://example.com/space.jpg",
+            "demo": True
+        }
+    return data
 
 def get_space_weather():
-    """
-    Get basic space weather data.
-    
-    Returns:
-        dict: Space weather information
-    """
     return {
         "solar_flares": "low",
-        "solar_flux": 75,
-        "geomagnetic_storm": "quiet"
+        "status": "normal"
     }
