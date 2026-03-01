@@ -1,4 +1,4 @@
-from spacekit import get_apod_safe, get_space_weather, satellite_position
+from agspace import get_apod_safe, get_space_weather, satellite_position
 
 def test_apod_safe():
     d = get_apod_safe()
